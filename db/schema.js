@@ -47,6 +47,7 @@ const typeDefs = gql`
         autenticarUsuario(input: AutenticarInput):Token
         #Productos
         nuevoProducto(input: ProductoInput):Producto
+        actualizarProducto(id:ID!, input:ProductoInput):Producto
     }
 `;
 

@@ -67,7 +67,7 @@ const resolvers = {
         autenticarUsuario: async (_, { input }) => {
             const { email, password } = input
             //Si el usuario existe
-            const existeUsuario = await Usuario.findOne({ email });
+            const existeUsuario = await Usuario.findById({ email });
             if (!existeUsuario) {
                 throw new Error('El usuario no existe');
             }
@@ -91,8 +91,18 @@ const resolvers = {
             } catch (error) {
                 console.log(error);
             }
+        },
+        actualizarProducto: async (_, { id, input }) => {
+            //Revisar si el producto existe
+            let producto = await Producto.findById(id);
 
-
+            if (!producto) {
+                throw new error('El producto no existe');
+            }
+            //Guardar en base de datos
+            producto = await Producto.findOneAndUpdate({ _id: id }, input, { new: true });
+            
+            return producto;
         }
     }
 }
